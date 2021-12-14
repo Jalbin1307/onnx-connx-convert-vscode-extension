@@ -1,26 +1,42 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { Uri,workspace } from 'vscode';
+import FormData = require('form-data');
+const fs = require('fs');
+var request = require('request');
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
 	
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "onnx2connx-convert" is now active!');
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('onnx2connx-convert.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from onnx2connx-convert!');
+	let disposable = vscode.commands.registerCommand('onnx2connx-convert.convert', (uri: Uri, items : Uri[]) => {
+		var formData = new FormData();
+		const workspacefolder = workspace.getWorkspaceFolder(Uri.file(items[0].path))?.uri.path;
+
+		formData.append("file",fs.createReadStream(items[0].path));
+		console.log(formData);
+
+		//Local host :        http://127.0.0.1:8000/
+		//ONNX-CONNX Server : https://mysite-tscvl.run.goorm.io/
+		formData.submit('https://mysite-tscvl.run.goorm.io/rest_api_test/', function(err, res){
+			if(err) throw err;
+			if(res){			
+				var wstream = fs.createWriteStream(workspacefolder + "/connx.zip");
+				res.on('data',function(data){
+					wstream.write(data);
+				});
+				res.on('end',function(){
+					wstream.end();
+				});
+				res.on('error',function(err){
+					console.log('Something is Wrong');
+					wstream.close();
+				});	
+			}
+			console.log('Done');
+		});		
 	});
 
 	context.subscriptions.push(disposable);
 }
 
-// this method is called when your extension is deactivated
 export function deactivate() {}
