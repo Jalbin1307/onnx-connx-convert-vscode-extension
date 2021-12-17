@@ -8,6 +8,7 @@ export function activate(context: vscode.ExtensionContext) {
 	
 	console.log('Congratulations, your extension "onnx2connx-convert" is now active!');
 
+	// context menu command : ONNX to CONNX convert
 	let disposable = vscode.commands.registerCommand('onnx2connx-convert.convert', (uri: Uri, items : Uri[]) => {
 		var formData = new FormData();
 		const workspacefolder = workspace.getWorkspaceFolder(Uri.file(items[0].path))?.uri.path;
