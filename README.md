@@ -1,6 +1,6 @@
-# onnx2connx-convert README
+# onnx-to-connx-convert README
 
-This is the README for your extension "onnx2connx-convert". After writing up a brief description, we recommend including the following sections.
+This is the README for your extension "onnx-to-connx-convert". After writing up a brief description, we recommend including the following sections.
 
 ## Features
 
