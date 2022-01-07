@@ -39,7 +39,6 @@ export function activate(context: vscode.ExtensionContext) {
 					wstream.close();
 				});	
 			}
-			console.log('Done');
 		});		
 	});
 
