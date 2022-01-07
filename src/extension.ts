@@ -81,7 +81,7 @@ class OnnxViewProvider implements vscode.WebviewViewProvider {
 
 
 	private _getHtmlForWebview(webview: vscode.Webview) {
-		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'src', 'page.html'));
+		const scriptUri = webview.asWebviewUri(vscode.Uri.joinPath(this._extensionUri, 'out', 'page.html'));
 		const pathUri = scriptUri.with({scheme:'vscode-resource'});
 		const html = fs.readFileSync(pathUri.fsPath,'utf-8');
 		return html;
