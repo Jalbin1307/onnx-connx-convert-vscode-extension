@@ -2,7 +2,7 @@
   "name": "onnx2connx-convert",
   "displayName": "onnx2connx-convert",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "publisher": "neowine",
   "engines": {
     "vscode": "^1.63.0"
@@ -21,7 +21,7 @@
         {
           "id": "connx",
           "title": "ONNX to CONNX explorer",
-          "icon": "./src/1.png"
+          "icon": "./out/1.png"
         }
       ]
     },
