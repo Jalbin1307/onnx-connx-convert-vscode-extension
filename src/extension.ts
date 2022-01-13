@@ -17,9 +17,9 @@ export function activate(context: vscode.ExtensionContext) {
 	// context menu command : ONNX to CONNX convert
 	let disposable = vscode.commands.registerCommand('onnx2connx-convert.convert', (uri: Uri, items : Uri[]) => {
 		var formData = new FormData();
-		const workspacefolder = workspace.getWorkspaceFolder(Uri.file(items[0].path))?.uri.path;
+		const workspacefolder = workspace.getWorkspaceFolder(Uri.file(items[0].fsPath))?.uri.path;
 
-		formData.append("file",fs.createReadStream(items[0].path));
+		formData.append("file",fs.createReadStream(items[0].fsPath));
 		console.log(formData);
 
 		//Local host :        http://127.0.0.1:8000/
