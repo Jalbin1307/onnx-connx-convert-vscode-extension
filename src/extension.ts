@@ -35,7 +35,6 @@ export function activate(context: vscode.ExtensionContext) {
 					wstream.end();
 				});
 				res.on('error',function(err){
-					console.log('Something is Wrong');
 					wstream.close();
 				});	
 			}
